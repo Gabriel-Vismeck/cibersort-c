@@ -20,7 +20,7 @@ void mostrar_ajuda(void)
     printf("CIBERSORT em C puro (em português)\n\n"
            "Uso: cibersort --assinatura LM22.txt --mistura expressao.txt --saida resultado.tsv [opções]\n\n"
            "  --assinatura ARQ        tabela da assinatura (genes x tipos celulares), escala linear\n"
-           "  --mistura ARQ           tabela de expressão (genes x amostras)\n"
+           "  --expressao ARQ           tabela de expressão (genes x amostras)\n"
            "  --saida ARQ             arquivo de resultado (.tsv)\n"
            "  --perm N                número de permutações (padrão 100; 0 = sem valor-p)\n"
            "  --com-quantis           normaliza por quantis (recomendado para microarray)\n"
@@ -64,7 +64,7 @@ int ler_argumentos(int argc, char **argv, Configuracao *cfg)
         else if (!strcmp(a, "--com-quantis")) op->normalizar_por_quantis = 1;
         else if (!strcmp(a, "--absoluto")) op->absoluto = 1;
         else if (i + 1 < argc && !strcmp(a, "--assinatura")) cfg->arquivo_assinatura = argv[++i];
-        else if (i + 1 < argc && !strcmp(a, "--mistura")) cfg->arquivo_mistura = argv[++i];
+        else if (i + 1 < argc && (!strcmp(a, "--expressao") || !strcmp(a, "--mistura"))) cfg->arquivo_mistura = argv[++i];
         else if (i + 1 < argc && !strcmp(a, "--saida")) cfg->arquivo_saida = argv[++i];
         else if (i + 1 < argc && !strcmp(a, "--perm")) op->n_perm = atoi(argv[++i]);
         else if (i + 1 < argc && !strcmp(a, "--tolerancia")) op->tolerancia = atof(argv[++i]);
